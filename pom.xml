@@ -21,7 +21,7 @@
     <module>msa-sa01-bnkConfigSvr</module>
     <module>msa-sa02-bnkSvcConcept</module>
     <module>msa-sa02-bnkSvcHarang</module>
-    <module>msa-sa03-bnkRegSever</module>
+    <module>msa-sa03-bnkRegSvr</module>
     <module>msa-sa04-bnkSvcGateway</module>
     <module>msa-sa05-bnkAuthServer</module>
   </modules>
