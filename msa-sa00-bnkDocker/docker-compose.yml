@@ -23,14 +23,24 @@ services:
         BNKREGSERVER_PORT: 8761
         BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
         BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
-  database:
-      image: postgres:9.5
+  mariadb:
+      image: mariadb:10.4
       ports:
-        - "5432:5432"
+        - "3306:3306"
       environment:
-        - POSTGRES_USER=postgres
-        - POSTGRES_PASSWORD=p0stgr@s
-        - POSTGRES_DB=eagle_eye_local
+        - MYSQL_USER=harang
+        - MYSQL_PASSWORD=1111
+        - MYSQL_DATABASE=harang
+  oracle:
+      image: store/oracle/database-enterprise:12.2.0.1
+      volumes:
+        - 1111/concept/oracle:/ORCL
+      ports:
+        - "1521:1521"
+      environment:
+        - ORACLE_SID=harang
+        - MYSQL_PASSWORD=1111
+        - MYSQL_DATABASE=harang
   harang:
       image: chrisna2/harang:20190808
       ports:
@@ -39,7 +49,7 @@ services:
         PROFILE: "default"
         SERVER_PORT: "8080"
         ES_PORT:           9200
-        DATABASE_PORT:     5432
+        MARIADB_PORT:     3306
         BNKCONFIGSVR_PORT: 8888
         BNKREGSERVER_PORT: 8761
         BNKAUTHSERVER_PORT:   8091
@@ -69,7 +79,7 @@ services:
       environment:
         PROFILE: "default"
         SERVER_PORT: "8901"
-        DATABASE_PORT:     5432
+        MARIADB_PORT:     3306
         BNKCONFIGSVR_PORT: 8888
         BNKREGSERVER_PORT: 8761
         BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
