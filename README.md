@@ -1,4 +1,4 @@
-# Spring-Microservices-In-Action
+# Spring-Microservices-In-Action with Docker
 책을 따라하는 것보다. 내 것으로 만드는게 더 중요하다.
 
 이클립스 임포트 방법
