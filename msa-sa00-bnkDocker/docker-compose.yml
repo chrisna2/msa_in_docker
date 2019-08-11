@@ -31,16 +31,14 @@ services:
         - MYSQL_USER=harang
         - MYSQL_PASSWORD=1111
         - MYSQL_DATABASE=harang
-  oracle:
-      image: store/oracle/database-enterprise:12.2.0.1
-      volumes:
-        - 1111/concept/oracle:/ORCL
+  postgres:
+      image: postgres:9.5
       ports:
-        - "1521:1521"
+        - "5432:5432"
       environment:
-        - ORACLE_SID=harang
-        - MYSQL_PASSWORD=1111
-        - MYSQL_DATABASE=harang
+        - POSTGRES_USER=concept
+        - POSTGRES_PASSWORD=1111
+        - POSTGRES_DB=concept
   harang:
       image: chrisna2/harang:20190808
       ports:
@@ -56,6 +54,8 @@ services:
         BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
         BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
         BNKAUTHSERVER_URI:   "http://bnkauthserver:8901/auth/user"
+        KAFKASERVER_URI: "kafkaserver"
+        ZKSERVER_URI: "zookeeper"
         ENCRYPT_KEY:      "q1w2e3r4t5A!S@D#F$"
   concept:
       image: chrisna2/concept:20190808
@@ -64,13 +64,15 @@ services:
       environment:
         PROFILE: "default"
         SERVER_PORT: "8085"
-        DATABASE_PORT:     5432
+        POSTGRES_PORT:     5432
         BNKCONFIGSVR_PORT: 8888
         BNKREGSERVER_PORT: 8761
         BNKAUTHSERVER_PORT:   8091
         BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
         BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
         BNKAUTHSERVER_URI:   "http://bnkauthserver:8901/auth/user"
+        KAFKASERVER_URI: "kafkaserver"
+        ZKSERVER_URI: "zookeeper"
         ENCRYPT_KEY:       "q1w2e3r4t5A!S@D#F$"
   bnkauthserver:
       image: chrisna2/bnkauthserver:20190808
@@ -85,3 +87,34 @@ services:
         BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
         BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
         ENCRYPT_KEY:      "q1w2e3r4t5A!S@D#F$"
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+      
+  # kafkaserver:
+  # image: spotify/kafka
+  #   ports:
+  #     - 2181:2181
+  #     - 9092:9092
+  
+  zookeeper:
+    image: chrisna2/zookeeper
+    container_name: zookeeper
+    restart: always
+    ports:
+      - 2181:2181
+
+  kafkaserver:
+    image: chrisna2/kafka
+    container_name: kafka
+    restart: always
+    ports:
+      - 9092:9092
+    depends_on:
+      - zookeeper
+    links:
+      - zookeeper:zookeeper
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181

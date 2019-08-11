@@ -6,15 +6,15 @@
 
 	<select id="justSelect" resultType="map">
 		 select
-			 to_char(emp_no) as emp_no           
+			 emp_no::VARCHAR as emp_no           
 			,emp_nm        
 			,dept_code     
 			,rol_position  
-			,to_char(join_date) as join_date
-			,to_char(retire_date) as retire_date  
+			,join_date::VARCHAR as join_date
+			,retire_date::VARCHAR as retire_date  
 			,sal_type  
-			,to_char(month_sal) as month_sal   
-			,to_char(reg_date) as retire_date  
+			,month_sal::VARCHAR as month_sal   
+			,reg_date::VARCHAR as retire_date  
 		 from 
 			 tbl_emp
 	</select>
@@ -22,15 +22,15 @@
 
 	<select id="getEmpInfo" resultType="map" parameterType="string">
 		 select
-			 to_char(emp_no) as emp_no           
+			 emp_no::VARCHAR as emp_no           
 			,emp_nm        
 			,dept_code     
 			,rol_position  
-			,to_char(join_date) as join_date
-			,to_char(retire_date) as retire_date  
+			,join_date::VARCHAR as join_date
+			,retire_date::VARCHAR as retire_date  
 			,sal_type  
-			,to_char(month_sal) as month_sal   
-			,to_char(reg_date) as retire_date  
+			,month_sal::VARCHAR as month_sal   
+			,reg_date::VARCHAR as retire_date  
 		 from 
 			 tbl_emp
 		 where
@@ -42,7 +42,7 @@
 		<selectKey resultType="string" keyProperty="EMP_NO" order="BEFORE">
 		<![CDATA[
 			SELECT 
-				TO_CHAR(MAX(EMP_NO)+1) AS EMP_NO
+				(MAX(EMP_NO)+1)::VARCHAR AS EMP_NO
 			FROM
 				TBL_EMP
 		]]>
@@ -61,14 +61,14 @@
 				REG_DATE
 			)		
 			VALUES(
-				TO_NUMBER(#{EMP_NO}),
+				#{EMP_NO}::NUMERIC,
 				#{EMP_NM}, 
 				#{DEPT_CODE}, 
 				#{ROL_POSITION}, 
-				SYSDATE, 
+				TO_CHAR(now(),'YYYY-MM-DD')::DATE, 
 				TO_DATE('9999-12-31', 'YYYY-MM-DD'), 
 				#{SAL_TYPE}, 
-				TO_NUMBER(#{MONTH_SAL}), 
+				#{MONTH_SAL}::NUMERIC, 
 				SYSDATE
 			)
     	]]>
@@ -78,13 +78,13 @@
 	<update id="updEmpInfo" parameterType="map">
 		<![CDATA[
 			UPDATE TBL_EMP SET 
-				EMP_NM = NVL(#{EMP_NM},EMP_NM),     
-				DEPT_CODE = NVL(#{DEPT_CODE},DEPT_CODE),   
-				ROL_POSITION = NVL(#{ROL_POSITION},ROL_POSITION),
-				JOIN_DATE = NVL(TO_DATE(#{JOIN_DATE}, 'YYYY-MM-DD'),JOIN_DATE),
-				RETIRE_DATE = NVL(TO_DATE(#{RETIRE_DATE}, 'YYYY-MM-DD'),RETIRE_DATE), 
-				SAL_TYPE = NVL(#{SAL_TYPE},SAL_TYPE),    
-				MONTH_SAL = NVL(TO_NUMBER(#{MONTH_SAL}),MONTH_SAL),   
+				EMP_NM = COALESCE(#{EMP_NM},EMP_NM),     
+				DEPT_CODE = COALESCE(#{DEPT_CODE},DEPT_CODE),   
+				ROL_POSITION = COALESCE(#{ROL_POSITION},ROL_POSITION),
+				JOIN_DATE = COALESCE(TO_CHAR(#{JOIN_DATE},'YYYY-MM-DD')::DATE,JOIN_DATE),
+				RETIRE_DATE = COALESCE(TO_CHAR(#{RETIRE_DATE},'YYYY-MM-DD')::DATE,RETIRE_DATE), 
+				SAL_TYPE = COALESCE(#{SAL_TYPE},SAL_TYPE),    
+				MONTH_SAL = COALESCE(#{MONTH_SAL}::NUMERIC,MONTH_SAL),   
 				REG_DATE = SYSDATE
 			WHERE
 				EMP_NO = #{EMP_NO}
