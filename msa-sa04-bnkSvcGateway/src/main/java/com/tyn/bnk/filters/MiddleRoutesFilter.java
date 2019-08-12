@@ -1,40 +1,11 @@
 package com.tyn.bnk.filters;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.http.Header;
-import org.apache.http.HttpHost;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPatch;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.InputStreamEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.message.BasicHttpRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.netflix.zuul.filters.ProxyRequestHelper;
 import org.springframework.stereotype.Component;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
 import com.netflix.zuul.ZuulFilter;
-import com.netflix.zuul.context.RequestContext;
-import com.tyn.bnk.client.ConceptFeignClient;
-import com.tyn.bnk.client.HarangFeignClient;
 
 @Component
 public class MiddleRoutesFilter extends ZuulFilter {
@@ -47,11 +18,13 @@ public class MiddleRoutesFilter extends ZuulFilter {
     @Autowired
     FilterUtils filterUtils;
 
+    /*
 	@Autowired
 	ConceptFeignClient conceptFeignClient;
 	
 	@Autowired
 	HarangFeignClient harangFeignClient;
+    */
     
     @Override
     public String filterType() {

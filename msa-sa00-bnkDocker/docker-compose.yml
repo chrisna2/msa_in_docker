@@ -99,14 +99,14 @@ services:
   #     - 9092:9092
   
   zookeeper:
-    image: chrisna2/zookeeper
+    image: wurstmeister/zookeeper
     container_name: zookeeper
     restart: always
     ports:
       - 2181:2181
 
   kafkaserver:
-    image: chrisna2/kafka
+    image: wurstmeister/kafka
     container_name: kafka
     restart: always
     ports:
