@@ -33,11 +33,11 @@
         <artifactId>docker-maven-plugin</artifactId>
         <version>1.1.1</version>
         <configuration>
-        <baseImage>java</baseImage>
-        <imageName>tyn-msa</imageName>
-      </configuration>
+	        <baseImage>java</baseImage>
+	        <imageName>example</imageName>
+      	</configuration>
       </plugin>
     </plugins>
-  </build>
+  </build>  
   
 </project>

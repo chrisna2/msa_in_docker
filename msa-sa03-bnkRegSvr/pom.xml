@@ -14,7 +14,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	
-	<name>msa-sa03-bnkRegSever</name>
+	<name>BNK Eureka Registry Sever</name>
 	<description>BNK Registry Sever</description>
 
 	<dependencies>

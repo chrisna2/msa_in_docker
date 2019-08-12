@@ -59,6 +59,7 @@
 		</dependency>
 		
 		<!-- Oracle OJDBC6 (수동) -->
+		<!-- 
 		<dependency>
 		    <groupId>oracle.jdbc</groupId>
 		    <artifactId>OracleDriver</artifactId>
@@ -66,6 +67,7 @@
 		    <scope>system</scope>
 		    <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ojdbc6.jar</systemPath>
 		</dependency>
+		-->
 		
 		<!-- eureka-client -->
 		<dependency>
@@ -123,11 +125,13 @@
 			<artifactId>spring-kafka-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		
 	</dependencies>
 
 	<dependencyManagement>

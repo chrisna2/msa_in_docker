@@ -11,7 +11,7 @@ services:
       environment:
          BNKREGSERVER_PORT: 8761
          BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
-         ENCRYPT_KEY:      "q1w2e3r4t5A!S@D#F$"
+         ENCRYPT_KEY: "q1w2e3r4t5"
   bnksvcgateway:
       image: chrisna2/bnksvcgateway:20190808
       ports:
@@ -56,7 +56,7 @@ services:
         BNKAUTHSERVER_URI:   "http://bnkauthserver:8901/auth/user"
         KAFKASERVER_URI: "kafkaserver"
         ZKSERVER_URI: "zookeeper"
-        ENCRYPT_KEY:      "q1w2e3r4t5A!S@D#F$"
+        ENCRYPT_KEY: "q1w2e3r4t5"
   concept:
       image: chrisna2/concept:20190808
       ports:
@@ -73,7 +73,7 @@ services:
         BNKAUTHSERVER_URI:   "http://bnkauthserver:8901/auth/user"
         KAFKASERVER_URI: "kafkaserver"
         ZKSERVER_URI: "zookeeper"
-        ENCRYPT_KEY:       "q1w2e3r4t5A!S@D#F$"
+        ENCRYPT_KEY: "q1w2e3r4t5"
   bnkauthserver:
       image: chrisna2/bnkauthserver:20190808
       ports:
@@ -86,7 +86,7 @@ services:
         BNKREGSERVER_PORT: 8761
         BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
         BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
-        ENCRYPT_KEY:      "q1w2e3r4t5A!S@D#F$"
+        ENCRYPT_KEY: "q1w2e3r4t5"
   redis:
     image: redis:alpine
     ports:
