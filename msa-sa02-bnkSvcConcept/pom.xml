@@ -44,13 +44,6 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<!-- spring boot test -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		
 		<!-- Mybatis 버전 확인 필수! -->	
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>

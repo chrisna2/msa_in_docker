@@ -26,15 +26,20 @@ services:
   mariadb:
       image: mariadb:10.4
       ports:
-        - "3306:3306"
+        - "3307:3307"
+      volumes:
+        - //d/tyn_dev/docker/database/mariadb:/var/lib/mysql
       environment:
+        - MYSQL_ROOT_PASSWORD=1111
         - MYSQL_USER=harang
         - MYSQL_PASSWORD=1111
         - MYSQL_DATABASE=harang
   postgres:
       image: postgres:9.5
       ports:
-        - "5432:5432"
+        - "5433:5433"
+      volumes:
+        - //d/tyn_dev/docker/database/postgres:/var/lib/mysql        
       environment:
         - POSTGRES_USER=concept
         - POSTGRES_PASSWORD=1111
@@ -47,7 +52,7 @@ services:
         PROFILE: "default"
         SERVER_PORT: "8080"
         ES_PORT:           9200
-        MARIADB_PORT:     3306
+        MARIADB_PORT:     3307
         BNKCONFIGSVR_PORT: 8888
         BNKREGSERVER_PORT: 8761
         BNKAUTHSERVER_PORT:   8091
@@ -81,7 +86,7 @@ services:
       environment:
         PROFILE: "default"
         SERVER_PORT: "8901"
-        MARIADB_PORT:     3306
+        MARIADB_PORT:     3307
         BNKCONFIGSVR_PORT: 8888
         BNKREGSERVER_PORT: 8761
         BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
