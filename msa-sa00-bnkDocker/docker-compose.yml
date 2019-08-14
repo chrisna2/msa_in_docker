@@ -1,9 +1,18 @@
-version: '2'
+version: '3'
+
+volumes:
+  postgres_data:
+    external: true  
+  mariadb_data:
+    external: true
+
 services:
+  
   bnkregserver:
      image: chrisna2/bnkregserver:20190808
      ports:
          - "8761:8761"
+  
   bnkconfigsvr:
       image: chrisna2/bnkconfigsvr:20190808
       ports:
@@ -12,55 +21,66 @@ services:
          BNKREGSERVER_PORT: 8761
          BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
          ENCRYPT_KEY: "q1w2e3r4t5"
+  
   bnksvcgateway:
       image: chrisna2/bnksvcgateway:20190808
       ports:
         - "5555:5555"
       environment:
         PROFILE: "default"
-        SERVER_PORT: "5555"
+        SERVER_PORT: 5555
         BNKCONFIGSVR_PORT: 8888
         BNKREGSERVER_PORT: 8761
-        BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
+        eureka.client.service-url.defaultZone: "http://bnkconfigsvr:8888"
         BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
+  
   mariadb:
       image: mariadb:10.4
       ports:
-        - "3307:3307"
+        - "3306:3306"
       volumes:
-        - //d/tyn_dev/docker/database/mariadb:/var/lib/mysql
+        - mariadb_data:/var/lib/mysql
       environment:
         - MYSQL_ROOT_PASSWORD=1111
         - MYSQL_USER=harang
         - MYSQL_PASSWORD=1111
         - MYSQL_DATABASE=harang
+      command: mysqld --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON        
+  
   postgres:
-      image: postgres:9.5
+      image: postgres:11.5
       ports:
-        - "5433:5433"
-      volumes:
-        - //d/tyn_dev/docker/database/postgres:/var/lib/mysql        
+        - "5432:5432"
+      volumes:       
+        #- ./docker/postgres/data:/var/lib/postgresql/data/pgdata
+        - postgres_data:/var/lib/postgresql/data
       environment:
         - POSTGRES_USER=concept
         - POSTGRES_PASSWORD=1111
         - POSTGRES_DB=concept
+        - POSTGRES_INITDB_ARGS=--encoding=UTF-8
+        #- PGDATA=/TMP
   harang:
       image: chrisna2/harang:20190808
       ports:
         - "8080:8080"
       environment:
         PROFILE: "default"
-        SERVER_PORT: "8080"
+        SERVER_PORT: 8080
         ES_PORT:           9200
-        MARIADB_PORT:     3307
+        MARIADB_PORT:     3306
         BNKCONFIGSVR_PORT: 8888
         BNKREGSERVER_PORT: 8761
         BNKAUTHSERVER_PORT:   8091
         BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
         BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
         BNKAUTHSERVER_URI:   "http://bnkauthserver:8901/auth/user"
+        
         KAFKASERVER_URI: "kafkaserver"
         ZKSERVER_URI: "zookeeper"
+        KAFKASERVER_PORT:    2181
+        REDIS_PORT:          6379
+        
         ENCRYPT_KEY: "q1w2e3r4t5"
   concept:
       image: chrisna2/concept:20190808
@@ -68,7 +88,7 @@ services:
         - "8085:8085"
       environment:
         PROFILE: "default"
-        SERVER_PORT: "8085"
+        SERVER_PORT: 8085
         POSTGRES_PORT:     5432
         BNKCONFIGSVR_PORT: 8888
         BNKREGSERVER_PORT: 8761
@@ -76,8 +96,11 @@ services:
         BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
         BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
         BNKAUTHSERVER_URI:   "http://bnkauthserver:8901/auth/user"
+       
         KAFKASERVER_URI: "kafkaserver"
         ZKSERVER_URI: "zookeeper"
+        KAFKASERVER_PORT: 2181
+       
         ENCRYPT_KEY: "q1w2e3r4t5"
   bnkauthserver:
       image: chrisna2/bnkauthserver:20190808
@@ -85,8 +108,8 @@ services:
         - "8901:8901"
       environment:
         PROFILE: "default"
-        SERVER_PORT: "8901"
-        MARIADB_PORT:     3307
+        SERVER_PORT: 8901
+        MARIADB_PORT:     3306
         BNKCONFIGSVR_PORT: 8888
         BNKREGSERVER_PORT: 8761
         BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"

@@ -12,4 +12,4 @@ echo "******* Eureka Server has started"
 echo "********************************************************"
 echo "Starting Configuration Service with Eureka Endpoint:  $BNKREGSERVER_URI";
 echo "********************************************************"
-java -Djava.security.egd=file:/dev/./urandom -Deureka.client.serviceUrl.defaultZone=$BNKREGSERVER_URI -jar /usr/local/bnkConfigSvr/@project.build.finalName@.jar
+java -Djava.security.egd=file:/dev/./urandom -Deureka.client.service-url.defaultZone=$BNKREGSERVER_URI -jar /usr/local/bnkconfigsvr/@project.build.finalName@.jar
