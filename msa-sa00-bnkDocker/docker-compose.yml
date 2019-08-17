@@ -31,7 +31,7 @@ services:
         SERVER_PORT: 5555
         BNKCONFIGSVR_PORT: 8888
         BNKREGSERVER_PORT: 8761
-        eureka.client.service-url.defaultZone: "http://bnkconfigsvr:8888"
+        BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
         BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
   
   mariadb:
