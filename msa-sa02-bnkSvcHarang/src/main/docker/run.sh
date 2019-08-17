@@ -41,6 +41,4 @@ java -Djava.security.egd=file:/dev/./urandom -Dserver.port=$SERVER_PORT   \
      -Deureka.client.service-url.defaultZone=$BNKREGSERVER_URI             \
      -Dspring.cloud.config.uri=$BNKCONFIGSVR_URI                          \
      -Dsecurity.oauth2.resource.user-info-uri=$BNKAUTHSERVER_URI               \
-     -Dspring.cloud.stream.kafka.binder.zk-nodess=$ZKSERVER_URI          \
-     -Dspring.cloud.stream.kafka.binder.brokers=$KAFKASERVER_URI             \     
      -Dspring.profiles.active=$PROFILE -jar /usr/local/harang/@project.build.finalName@.jar

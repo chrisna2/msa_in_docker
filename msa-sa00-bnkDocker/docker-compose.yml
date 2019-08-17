@@ -82,6 +82,7 @@ services:
         REDIS_PORT:          6379
         
         ENCRYPT_KEY: "q1w2e3r4t5"
+        
   concept:
       image: chrisna2/concept:20190808
       ports:
@@ -102,6 +103,7 @@ services:
         KAFKASERVER_PORT: 2181
        
         ENCRYPT_KEY: "q1w2e3r4t5"
+        
   bnkauthserver:
       image: chrisna2/bnkauthserver:20190808
       ports:
