@@ -18,14 +18,9 @@ echo "********************************************************"
 while ! `nc -z bnkconfigsvr $BNKCONFIGSVR_PORT`; do sleep 3; done
 echo "*******  Configuration Server has started"
 
-#echo "********************************************************"
-#echo "Waiting for the zookeeper server to start on port  $KAFKASERVER_PORT"
-#echo "********************************************************"
-#while ! `nc -z zookeeper $KAFKASERVER_PORT`; do sleep 10; done
-#echo "******* zookeeper Server has started"
-
 echo "********************************************************"
-echo "Starting Organization Service                           "
+echo "Starting Concept Service                           "
+echo "Concept service will use $BNKAUTHSERVER_URI for URI"
 echo "********************************************************"
 java -Djava.security.egd=file:/dev/./urandom -Dserver.port=$SERVER_PORT   \
      -Deureka.client.service-url.defaultZone=$BNKREGSERVER_URI             \

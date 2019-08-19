@@ -22,7 +22,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 			//인가 규칙을 정의하는 마지막 부분에서 서비스의 모든 엔드포인트도 인증된 사용자로 접근 되어야 한다고 정의함
 			.anyRequest()
 			.authenticated();
-		
 		//모든 접근 규칙을 재정의한 configure() 메서드 안에서 스프링이 전달한 HttpSecurity클래스를 사용해 정의 된다.
 		//이 예제에서는 조직서비스의 모든 URL에 대해 인증된 사용자만 접근하도록 제한한다.
 

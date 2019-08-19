@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.tyn.bnk.persistence.SimpleMapper">
+
+	<select id="justSelect" resultType="map">
+		 select
+			 emp_no::VARCHAR as emp_no           
+			,emp_nm        
+			,dept_code     
+			,rol_position  
+			,join_date::VARCHAR as join_date
+			,retire_date::VARCHAR as retire_date  
+			,sal_type  
+			,month_sal::VARCHAR as month_sal   
+			,reg_date::VARCHAR as retire_date  
+		 from 
+			 tbl_emp
+	</select>
+
+	<select id="getEmpInfo" resultType="map" parameterType="string">
+		 select
+			 emp_no::VARCHAR as emp_no           
+			,emp_nm        
+			,dept_code     
+			,rol_position  
+			,join_date::VARCHAR as join_date
+			,retire_date::VARCHAR as retire_date  
+			,sal_type  
+			,month_sal::VARCHAR as month_sal   
+			,reg_date::VARCHAR as retire_date  
+		 from 
+			 tbl_emp
+		 where
+		 	emp_no = #{emp_no}
+	</select>
+	
+	<insert id="saveEmpInfo" parameterType="map">
+		<selectKey resultType="string" keyProperty="EMP_NO" order="BEFORE">
+		<![CDATA[
+			SELECT 
+				(MAX(EMP_NO)+1)::VARCHAR AS EMP_NO
+			FROM
+				TBL_EMP
+		]]>
+		</selectKey>
+		<![CDATA[
+			INSERT INTO 
+			TBL_EMP(
+				EMP_NO,      
+				EMP_NM,      
+				DEPT_CODE,   
+				ROL_POSITION,
+				JOIN_DATE,  
+				RETIRE_DATE, 
+				SAL_TYPE,    
+				MONTH_SAL,   
+				REG_DATE
+			)		
+			VALUES(
+				#{EMP_NO}::NUMERIC,
+				#{EMP_NM}, 
+				#{DEPT_CODE}, 
+				#{ROL_POSITION}, 
+				TO_CHAR(now(),'YYYY-MM-DD')::DATE, 
+				TO_DATE('9999-12-31', 'YYYY-MM-DD'), 
+				#{SAL_TYPE}, 
+				#{MONTH_SAL}::NUMERIC, 
+				TO_DATE('9999-12-31', 'YYYY-MM-DD')
+			)
+    	]]>
+	</insert>
+	
+	<update id="updEmpInfo" parameterType="map">
+		<![CDATA[
+			UPDATE TBL_EMP SET 
+				EMP_NM = COALESCE(#{EMP_NM},EMP_NM),     
+				DEPT_CODE = COALESCE(#{DEPT_CODE},DEPT_CODE),   
+				ROL_POSITION = COALESCE(#{ROL_POSITION},ROL_POSITION),
+				JOIN_DATE = COALESCE(TO_CHAR(#{JOIN_DATE},'YYYY-MM-DD')::DATE,JOIN_DATE),
+				RETIRE_DATE = COALESCE(TO_CHAR(#{RETIRE_DATE},'YYYY-MM-DD')::DATE,RETIRE_DATE), 
+				SAL_TYPE = COALESCE(#{SAL_TYPE},SAL_TYPE),    
+				MONTH_SAL = COALESCE(#{MONTH_SAL}::NUMERIC,MONTH_SAL),   
+				REG_DATE = TO_DATE('9999-12-31', 'YYYY-MM-DD')::DATE
+			WHERE
+				EMP_NO = #{EMP_NO}
+    	]]>	
+	</update>
+	
+</mapper>

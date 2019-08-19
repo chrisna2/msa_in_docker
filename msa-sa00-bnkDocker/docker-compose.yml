@@ -60,6 +60,7 @@ services:
         - POSTGRES_DB=concept
         - POSTGRES_INITDB_ARGS=--encoding=UTF-8
         #- PGDATA=/TMP
+ 
   harang:
       image: chrisna2/harang:20190808
       ports:
@@ -75,11 +76,6 @@ services:
         BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
         BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
         BNKAUTHSERVER_URI:   "http://bnkauthserver:8901/auth/user"
-        
-        KAFKASERVER_URI: "kafkaserver"
-        ZKSERVER_URI: "zookeeper"
-        KAFKASERVER_PORT:    2181
-        REDIS_PORT:          6379
         
         ENCRYPT_KEY: "q1w2e3r4t5"
         
@@ -98,11 +94,46 @@ services:
         BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
         BNKAUTHSERVER_URI:   "http://bnkauthserver:8901/auth/user"
        
+        ENCRYPT_KEY: "q1w2e3r4t5"
+
+  msgharang:
+      image: chrisna2/msgharang:20190808
+      ports:
+        - "8081:8081"
+      environment:
+        PROFILE: "default"
+        SERVER_PORT: 8080
+        MARIADB_PORT:     3306
+        BNKCONFIGSVR_PORT: 8888
+        BNKREGSERVER_PORT: 8761
+        BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
+        BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
+        
+        KAFKASERVER_URI: "kafkaserver"
+        ZKSERVER_URI: "zookeeper"
+        KAFKASERVER_PORT:    2181
+        REDIS_PORT:          6379
+        
+        ENCRYPT_KEY: "q1w2e3r4t5"
+        
+  msgconcept:
+      image: chrisna2/msgconcept:20190808
+      ports:
+        - "8086:8086"
+      environment:
+        PROFILE: "default"
+        SERVER_PORT: 8086
+        POSTGRES_PORT:     5432
+        BNKCONFIGSVR_PORT: 8888
+        BNKREGSERVER_PORT: 8761
+        BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
+        BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
+       
         KAFKASERVER_URI: "kafkaserver"
         ZKSERVER_URI: "zookeeper"
         KAFKASERVER_PORT: 2181
        
-        ENCRYPT_KEY: "q1w2e3r4t5"
+        ENCRYPT_KEY: "q1w2e3r4t5"        
         
   bnkauthserver:
       image: chrisna2/bnkauthserver:20190808
@@ -117,6 +148,7 @@ services:
         BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
         BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
         ENCRYPT_KEY: "q1w2e3r4t5"
+        
   redis:
     image: redis:alpine
     ports:
