@@ -67,7 +67,7 @@
 				TO_DATE('9999-12-31', 'YYYY-MM-DD'), 
 				#{SAL_TYPE}, 
 				#{MONTH_SAL}::NUMERIC, 
-				TO_DATE('9999-12-31', 'YYYY-MM-DD')
+				TO_CHAR(now(),'YYYY-MM-DD')::DATE
 			)
     	]]>
 	</insert>
@@ -82,7 +82,7 @@
 				RETIRE_DATE = COALESCE(TO_CHAR(#{RETIRE_DATE},'YYYY-MM-DD')::DATE,RETIRE_DATE), 
 				SAL_TYPE = COALESCE(#{SAL_TYPE},SAL_TYPE),    
 				MONTH_SAL = COALESCE(#{MONTH_SAL}::NUMERIC,MONTH_SAL),   
-				REG_DATE = TO_DATE('9999-12-31', 'YYYY-MM-DD')::DATE
+				REG_DATE = TO_CHAR(now(),'YYYY-MM-DD')::DATE
 			WHERE
 				EMP_NO = #{EMP_NO}
     	]]>	

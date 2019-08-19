@@ -34,7 +34,7 @@ public class SimpleSourceBean {
 		 
 		 msg.put("type", Map.class.getTypeName());
 		 msg.put("action", action);
-		 msg.put("empNo", empNo);
+		 msg.put("EMP_NO", empNo);
 		 msg.put("correlationId", UserContext.getCorrelationId());
 		 
 		 //책에서 POJO형을 통해 메세지를 전달 하지만 나는 Map을 통해 메세지가 전달되는 확인을 하고 싶다.

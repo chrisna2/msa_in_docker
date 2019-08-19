@@ -58,9 +58,8 @@ public class MsgHarangApplication {
 	@StreamListener(Sink.INPUT)
 	public void loggerSink(Map<String, Object> msg) {
 		logger.info("@HarangApp_전송받은메세지"
-				  + "\n@emp_no : "+msg.get("emp_no")
+				  + "\n@EMP_NO : "+msg.get("EMP_NO")
 				  + "\n@Action : "+msg.get("action"));
-		
 	}
 	
 	public static void main(String[] args) {
