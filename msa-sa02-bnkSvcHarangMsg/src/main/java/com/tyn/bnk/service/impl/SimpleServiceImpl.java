@@ -66,10 +66,10 @@ public class SimpleServiceImpl implements SimpleService {
 	}
 
 	@Override
-	public Map<String, String> getEmpInfoClientType(String emp_no, String clientType) {
+	public Map<String, Object> getEmpInfoClientType(String emp_no, String clientType) {
 		// TODO Auto-generated method stub
 		
-		Map<String, String> result = new HashMap<String, String>();
+		Map<String, Object> result = new HashMap<String, Object>();
 		
 		switch(clientType) {
 			case "feign":
@@ -84,9 +84,10 @@ public class SimpleServiceImpl implements SimpleService {
 				logger.info("I am using the discovery client");
 				result = discoveryClient.getEmpInfo(emp_no);
 				break;
+			case "restRedis":
 			default:
 				logger.info("I am using the rest client");
-				result = restClient.getEmpInfo(emp_no);
+				result = (Map)restClient.getConcept(emp_no);
 		}
 		
 		return result;
@@ -94,9 +95,9 @@ public class SimpleServiceImpl implements SimpleService {
 
 	@Override
 	@HystrixCommand//@HystrixCommand는 회로 차단기로 getEmpInfo()메서드를 연결하는데 사용된다.
-	public Map<String, String> getEmpInfo(String emp_no) {
+	public Map<String, Object> getEmpInfo(String emp_no) {
 		// TODO Auto-generated method stub
-		Map<String, String> result = new HashMap<String, String>();
+		Map<String, Object> result = new HashMap<String, Object>();
 		result = feignClient.getEmpInfo(emp_no);
 		return result;
 	}

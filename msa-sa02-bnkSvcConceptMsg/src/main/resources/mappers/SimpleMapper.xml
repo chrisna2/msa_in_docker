@@ -6,34 +6,34 @@
 
 	<select id="justSelect" resultType="map">
 		 select
-			 emp_no::VARCHAR as emp_no           
+			 emp_no
 			,emp_nm        
 			,dept_code     
 			,rol_position  
-			,join_date::VARCHAR as join_date
-			,retire_date::VARCHAR as retire_date  
+			,join_date
+			,retire_date
 			,sal_type  
-			,month_sal::VARCHAR as month_sal   
-			,reg_date::VARCHAR as retire_date  
+			,month_sal
+			,reg_date
 		 from 
 			 tbl_emp
 	</select>
 
 	<select id="getEmpInfo" resultType="map" parameterType="string">
 		 select
-			 emp_no::VARCHAR as emp_no           
+			 emp_no      
 			,emp_nm        
 			,dept_code     
 			,rol_position  
-			,join_date::VARCHAR as join_date
-			,retire_date::VARCHAR as retire_date  
+			,join_date
+			,retire_date
 			,sal_type  
-			,month_sal::VARCHAR as month_sal   
-			,reg_date::VARCHAR as retire_date  
+			,month_sal
+			,reg_date
 		 from 
 			 tbl_emp
 		 where
-		 	emp_no = #{emp_no}
+		 	emp_no = #{emp_no}::NUMERIC
 	</select>
 	
 	<insert id="saveEmpInfo" parameterType="map">

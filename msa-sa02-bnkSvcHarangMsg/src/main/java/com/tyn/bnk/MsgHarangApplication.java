@@ -53,7 +53,6 @@ public class MsgHarangApplication {
         return template;
 	}
 	
-	
 	//8장+
 	@StreamListener(Sink.INPUT)
 	public void loggerSink(Map<String, Object> msg) {

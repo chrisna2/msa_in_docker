@@ -15,6 +15,6 @@ public interface ConceptFeignClient {
 	@RequestMapping(value = "/emp/{emp_no}", 
 					method = RequestMethod.GET,
 					consumes = "application/json")
-	Map<String, String> getEmpInfo(@PathVariable("emp_no")String emp_no);
+	Map<String, Object> getEmpInfo(@PathVariable("emp_no")String emp_no);
 
 }

@@ -8,9 +8,9 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SimpleMapper {
 	
-	public List<Map<String, String>> justSelect();
-	public Map<String, String> getEmpInfo(String emp_no);
-	public int saveEmpInfo(Map<String, String> map);
-	public int updEmpInfo(Map<String, String> map);
+	public List<Map<String,Object>> justSelect();
+	public Map<String,Object> getEmpInfo(String emp_no);
+	public int saveEmpInfo(Map<String,Object> map);
+	public int updEmpInfo(Map<String,Object> map);
 
 }

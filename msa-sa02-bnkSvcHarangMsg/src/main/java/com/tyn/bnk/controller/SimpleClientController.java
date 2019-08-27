@@ -78,23 +78,23 @@ public class SimpleClientController {
 	
 	
 	@RequestMapping(value="/empbynotype/{emp_no}/{clientType}" , method = RequestMethod.GET)
-	ResponseEntity<Map<String,String>> getEmpInfoClientType(@PathVariable("emp_no") String emp_no,
+	ResponseEntity<Map<String,Object>> getEmpInfoClientType(@PathVariable("emp_no") String emp_no,
 														    @PathVariable("clientType") String clientType){
 		
-		ResponseEntity<Map<String,String>> response = null;
+		ResponseEntity<Map<String,Object>> response = null;
 		
-		response = new ResponseEntity<Map<String,String>>(service.getEmpInfoClientType(emp_no, clientType),
+		response = new ResponseEntity<Map<String,Object>>(service.getEmpInfoClientType(emp_no, clientType),
 														  HttpStatus.OK);
 		
 		return response;
 	}
 	
 	@RequestMapping(value="/empbyno/{emp_no}" , method = RequestMethod.GET)
-	ResponseEntity<Map<String,String>> getEmpInfoClientType(@PathVariable("emp_no") String emp_no){
+	ResponseEntity<Map<String,Object>> getEmpInfoClientType(@PathVariable("emp_no") String emp_no){
 		
-		ResponseEntity<Map<String,String>> response = null;
+		ResponseEntity<Map<String,Object>> response = null;
 		
-		response = new ResponseEntity<Map<String,String>>(service.getEmpInfo(emp_no),HttpStatus.OK);
+		response = new ResponseEntity<Map<String,Object>>(service.getEmpInfo(emp_no),HttpStatus.OK);
 		
 		return response;
 	}

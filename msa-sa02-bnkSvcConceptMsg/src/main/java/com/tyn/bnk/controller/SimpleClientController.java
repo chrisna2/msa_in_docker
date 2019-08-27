@@ -27,71 +27,70 @@ public class SimpleClientController {
 	SimpleService service;
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public ResponseEntity<Map<String,String>> test(){
+	public ResponseEntity<Map<String,Object>> test(){
 		
-		ResponseEntity<Map<String,String>> response = null;
-		Map<String,String> resMap = new HashMap<String, String>();
+		ResponseEntity<Map<String,Object>> response = null;
+		Map<String,Object> resMap = new HashMap<String,Object>();
 		
 		resMap.put("type","Second Eureka Client!");
 		resMap.put("msg","Spring cloud is Hard :-<");
 		
-		response =new ResponseEntity<Map<String,String>>(resMap, HttpStatus.OK);
+		response =new ResponseEntity<Map<String,Object>>(resMap, HttpStatus.OK);
 		
 		return response;
 	}
 	
 	@RequestMapping(value = "/dataCheck", method = RequestMethod.GET)
-	ResponseEntity<List<Map<String,String>>> testData(){
+	ResponseEntity<List<Map<String,Object>>> testData(){
 		
-		ResponseEntity<List<Map<String,String>>> response = null;
-		List<Map<String,String>> resMap = new ArrayList<Map<String,String>>();
+		ResponseEntity<List<Map<String,Object>>> response = null;
+		List<Map<String,Object>> resMap = new ArrayList<Map<String,Object>>();
 		
 		resMap = service.justSelect();
 		
-		response =new ResponseEntity<List<Map<String,String>>>(resMap, HttpStatus.OK);
+		response =new ResponseEntity<List<Map<String,Object>>>(resMap, HttpStatus.OK);
 		
 		return response;
 	}
 	
 	
 	@RequestMapping(value = "/emp/{emp_no}", method = RequestMethod.GET)
-	ResponseEntity<Map<String,String>> getEmpInfo(@PathVariable String emp_no){
+	ResponseEntity<Map<String,Object>> getEmpInfo(@PathVariable String emp_no){
 		
-		ResponseEntity<Map<String,String>> response = null;
+		ResponseEntity<Map<String,Object>> response = null;
 		
-		Map<String,String> resMap = new HashMap<String, String>();
+		Map<String,Object> resMap = new HashMap<String,Object>();
 		
 		resMap = service.getEmpInfo(emp_no);
 		
-		response =new ResponseEntity<Map<String,String>>(resMap, HttpStatus.OK);
+		response =new ResponseEntity<Map<String,Object>>(resMap, HttpStatus.OK);
 		
 		return response;
 	}
 	@RequestMapping(value = "/emp/saveEmpInfo", method = RequestMethod.POST)
-	ResponseEntity<Map<String,String>> saveEmpInfo(@RequestBody Map<String, String> map){
+	ResponseEntity<Map<String,Object>> saveEmpInfo(@RequestBody Map<String, Object> map){
 		
-		ResponseEntity<Map<String,String>> response = null;
-		Map<String,String> resMap = new HashMap<String, String>();
+		ResponseEntity<Map<String,Object>> response = null;
+		Map<String,Object> resMap = new HashMap<String,Object>();
 		
 		logger.info("@saveEmpInfo ->"+ map.toString());
 		
 		resMap = service.saveEmpInfo(map);
-		
-		response = new ResponseEntity<Map<String,String>>(resMap, HttpStatus.OK);
+		response = new ResponseEntity<Map<String,Object>>(resMap, HttpStatus.OK);
 		return response;
 	}
 	
 	@RequestMapping(value = "/emp/updEmpInfo", method = RequestMethod.POST)
-	ResponseEntity<Map<String,String>> updEmpInfo(@RequestBody Map<String, String> map){
+	ResponseEntity<Map<String,Object>> updEmpInfo(@RequestBody Map<String, Object> map){
 		
-		ResponseEntity<Map<String,String>> response = null;
-		Map<String,String> resMap = new HashMap<String, String>();
+		ResponseEntity<Map<String,Object>> response = null;
+		Map<String,Object> resMap = new HashMap<String,Object>();
 		
 		logger.info("@updEmpInfo ->"+ map.toString());
 		
 		resMap = service.updEmpInfo(map);
 		
-		response = new ResponseEntity<Map<String,String>>(resMap, HttpStatus.OK);
+		response = new ResponseEntity<Map<String,Object>>(resMap, HttpStatus.OK);
 		return response;
 	}
 	

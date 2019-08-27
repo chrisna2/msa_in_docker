@@ -1,6 +1,7 @@
 
 package com.tyn.bnk.client;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -11,13 +12,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.tyn.bnk.redis.ConceptRedisRepository;
+import com.tyn.bnk.utils.UserContext;
+
 //대안 1 - restTemplate
 @Component
 public class ConceptRestClient {
 
 	@Autowired
 	private RestTemplate restTemplate;
-
+	
+	/*8장 추가*/
+	@Autowired
+	ConceptRedisRepository conRedisRepo;
+	
+	private static final Logger logger = LoggerFactory.getLogger(ConceptRestClient.class);
 	/* 로컬에서 실행하기
 	  	
 		1.Zuul 및 Eureka를 포함하여 로컬에서 모든 서비스를 실행하는 경우 8 장에서 Zuul 서버를 Eureka에 등록하지 않습니다.
@@ -31,13 +40,10 @@ public class ConceptRestClient {
 		
 		2.주소 서비스가 유레카 서비스에 등록되기 때문에 주소 서비스가있는 코드가 작동합니다. RestTemplate은 Eureka에 대한 주소 서비스를 검색하여 적절한 IP 주소로 확인합니다.
 	 */
-	
-	private static final Logger logger = LoggerFactory.getLogger(ConceptRestClient.class);
-	
 	public Map getEmpInfo(String emp_no){
 		ResponseEntity<Map> restExchange = restTemplate.exchange(
 				//"http://concept/emp/{emp_no}", //concept은 서비스 아이디가 아니라 docker-compose.yml에서 설정한 서버의 명칭이다 <중요!>
-				"http://localhost:5555/bnk/c/emp/{emp_no}",
+				"http://bnksvcgateway/bnk/mc/emp/{emp_no}",
 				//localhost:5555
 				HttpMethod.GET, 
 				null,
@@ -45,5 +51,64 @@ public class ConceptRestClient {
 				emp_no);
 		return restExchange.getBody();
 	} 
+	
+	//8장 레디스
+	
+	//레디스 캐쉬 데이터 확인
+	private Map<String, Object> checkRedisCache(String emp_no){
+		try {
+			return conRedisRepo.findeConcept(emp_no);
+		}
+		catch (Exception e) {
+			logger.error("\n★래디스 캐쉬를 체크 하다 에러 발생"
+					+ "\nemp_no : {} \n에러메세지 : {}", emp_no, e);
+			return null;
+		}
+	}
+	
+	//캐쉬 데이터 구성
+	private void cacheConceptObject(Map<String, Object> map) {
+		try {
+			conRedisRepo.saveConcept(map);
+		}
+		catch(Exception e) {
+			logger.error("\n★래디스 캐쉬를 저장 하다 에러 발생"
+					+ "\nemp_no : {} \n에러메세지 : {}", map.get("emp_no"), e);
+		}
+	}
+	
+	//레디스 캐쉬 정보 확인
+	public Map<String, Object> getConcept(String emp_no){
+		
+		logger.info("Harang 서비스 Concept 데이터 가져오기 : {}", UserContext.getCorrelationId());
+		
+		Map<String, Object> concept = checkRedisCache(emp_no);
+		
+		//logger.info(concept.toString());
+		
+		if(concept != null) {
+			//레디스 데이터가 없다면, 원본 데이터에서 데이터를 조회하기 위해 조직 서비스를 호출한다.
+			logger.info("\n★ 캐쉬 서버에서 정상적으로 데이터 조회! \n직원번호 : {} \n조회데이터 : {}", emp_no, concept);
+			return concept;
+		}
+		
+		logger.info("해당 직원번호의 레디스 캐쉬 데이터가 없음 (서비스에서 조회 합니다): {}.", emp_no);
+		
+        ResponseEntity<Map> restExchange =
+                restTemplate.exchange(
+                        "http://bnksvcgateway/bnk/mc/emp/{emp_no}",
+                        HttpMethod.GET,
+                        null, Map.class, emp_no);
+        
+        //캐시에 레코드 저장
+        concept = restExchange.getBody();
+
+        if (concept!=null) {
+        	cacheConceptObject(concept);
+        }
+        
+        return concept;
+ 
+	}
 	
 }
