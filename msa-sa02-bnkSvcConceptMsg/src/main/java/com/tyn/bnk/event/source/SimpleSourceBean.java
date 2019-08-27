@@ -28,13 +28,13 @@ public class SimpleSourceBean {
 	 public void publishConceptChange(String action, String empNo) {
 		 logger.info("@CoceptSource\n"
 		 		+ "Sending Kafka message {}\n"
-		 		+ "for emp_no : {}\n",action,empNo);
+		 		+ "for emp_no : {}\n", action, empNo);
 		 
 		 Map<String, Object> msg = new HashMap<String, Object>();
 		 
 		 msg.put("type", Map.class.getTypeName());
 		 msg.put("action", action);
-		 msg.put("EMP_NO", empNo);
+		 msg.put("emp_no", empNo);
 		 msg.put("correlationId", UserContext.getCorrelationId());
 		 
 		 //책에서 POJO형을 통해 메세지를 전달 하지만 나는 Map을 통해 메세지가 전달되는 확인을 하고 싶다.

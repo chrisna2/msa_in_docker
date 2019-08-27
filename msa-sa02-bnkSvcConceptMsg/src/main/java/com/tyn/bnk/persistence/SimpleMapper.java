@@ -12,5 +12,6 @@ public interface SimpleMapper {
 	public Map<String,Object> getEmpInfo(String emp_no);
 	public int saveEmpInfo(Map<String,Object> map);
 	public int updEmpInfo(Map<String,Object> map);
+	public int delEmpInfo(String emp_no);
 
 }

@@ -27,10 +27,13 @@ public class SimpleServiceImpl implements SimpleService {
 	public List<Map<String,Object>> justSelect() {
 		return mapper.justSelect();
 	}
+	
 	@Override
 	public Map<String,Object> getEmpInfo(String emp_no) {
+		simpleSourceBeam.publishConceptChange("GET", emp_no);
 		return mapper.getEmpInfo(emp_no);
 	}
+	
 	@Override
 	public Map<String,Object> saveEmpInfo(Map<String,Object> map) {
 		
@@ -42,16 +45,29 @@ public class SimpleServiceImpl implements SimpleService {
 		
 		return map;
 	}
+	
 	@Override
 	public Map<String,Object> updEmpInfo(Map<String,Object> map) {
 		
 		mapper.updEmpInfo(map);
+		
 		logger.info("@updEmpInfo => "+map.toString());
 		
 		simpleSourceBeam.publishConceptChange("UPDATE", (String)map.get("EMP_NO"));
+		
+		return mapper.getEmpInfo((String)map.get("EMP_NO"));
+	}
+	
+	@Override
+	public int delEmpInfo(String emp_no) {
+		
+		int result = mapper.delEmpInfo(emp_no);
+		logger.info("@delEmpInfo => "+emp_no);
+		
+		simpleSourceBeam.publishConceptChange("DELETE", emp_no);
 		//조직 데이터를 변경 하는 메서드 모두 simpleSourceBeam.publishConceptChange()을 호출한다.
 		
-		return map;
+		return result;
 	}
 
 }

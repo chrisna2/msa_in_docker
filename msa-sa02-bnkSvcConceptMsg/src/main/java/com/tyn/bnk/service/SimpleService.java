@@ -9,5 +9,6 @@ public interface SimpleService {
 	public Map<String,Object> getEmpInfo(String emp_no);
 	public Map<String,Object> saveEmpInfo(Map<String,Object> map);
 	public Map<String,Object> updEmpInfo(Map<String,Object> map);
+	public int delEmpInfo(String emp_no);
 
 }

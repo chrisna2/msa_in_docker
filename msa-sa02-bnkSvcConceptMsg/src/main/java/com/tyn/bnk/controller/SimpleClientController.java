@@ -93,5 +93,18 @@ public class SimpleClientController {
 		response = new ResponseEntity<Map<String,Object>>(resMap, HttpStatus.OK);
 		return response;
 	}
+	@RequestMapping(value = "/emp/delEmpInfo/{emp_no}", method = RequestMethod.DELETE)
+	ResponseEntity<Integer> delEmpInfo(@PathVariable String emp_no){
+		
+		ResponseEntity<Integer> response = null;
+		
+		logger.info("@delEmpInfo ->"+ emp_no);
+		
+		int result = service.delEmpInfo(emp_no);
+		
+		response = new ResponseEntity<Integer>(result, HttpStatus.OK);
+		
+		return response;
+	}
 	
 }
