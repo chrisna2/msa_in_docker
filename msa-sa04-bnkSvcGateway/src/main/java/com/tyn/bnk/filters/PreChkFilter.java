@@ -1,5 +1,7 @@
 package com.tyn.bnk.filters;
 
+import java.util.UUID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +71,7 @@ public class PreChkFilter extends ZuulFilter{
 	
     private String generateCorrelationId(){
     	//실제로 tmx-correlation-id존재 여부를 확인하고, 없으면 상관관계ID의 GUID 값을 랜덤으로 생성하는 메서드
-        return java.util.UUID.randomUUID().toString();
+        return UUID.randomUUID().toString();
     }
 
 

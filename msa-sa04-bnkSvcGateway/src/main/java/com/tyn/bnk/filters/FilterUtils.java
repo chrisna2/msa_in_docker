@@ -29,6 +29,7 @@ public class FilterUtils {
         RequestContext ctx = RequestContext.getCurrentContext();
         ctx.addZuulRequestHeader(CORRELATION_ID, correlationId);
     }
+    
     /*임의로 변경*/
     public  final String getEmpNo(){
         RequestContext ctx = RequestContext.getCurrentContext();
@@ -39,11 +40,13 @@ public class FilterUtils {
             return  ctx.getZuulRequestHeaders().get(EMP_NO);
         }
     }
+    
     //임의로 변경
     public void setEmpNo(String empNo){
         RequestContext ctx = RequestContext.getCurrentContext();
         ctx.addZuulRequestHeader(EMP_NO,  empNo);
     }
+    
     public final String getUserId(){
         RequestContext ctx = RequestContext.getCurrentContext();
         if (ctx.getRequest().getHeader(USER_ID) !=null) {
@@ -53,14 +56,17 @@ public class FilterUtils {
             return  ctx.getZuulRequestHeaders().get(USER_ID);
         }
     }
+    
     public void setUserId(String userId){
         RequestContext ctx = RequestContext.getCurrentContext();
         ctx.addZuulRequestHeader(USER_ID,  userId);
     }
+    
     public final String getAuthToken(){
         RequestContext ctx = RequestContext.getCurrentContext();
         return ctx.getRequest().getHeader(AUTH_TOKEN);
     }
+    
     //임의로 변경
     public String getMId(){
         RequestContext ctx = RequestContext.getCurrentContext();
