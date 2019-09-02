@@ -190,4 +190,11 @@ services:
     command: syslog://logs3.papertrailapp.com:38619
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      
+  # 책과는 달리 현재는 사용자가 직접 집킨 서버를 구성하는 것은 지원하지 않는다. 도커 이미지로 대체됨
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - 9411:9411
   
