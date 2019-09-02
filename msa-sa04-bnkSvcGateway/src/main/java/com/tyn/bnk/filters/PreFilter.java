@@ -12,10 +12,10 @@ import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 
 @Component
-public class PreChkFilter extends ZuulFilter{
+public class PreFilter extends ZuulFilter{
 //모든 줄 필터는 ZuulFilter클래스를 확장하고 오버라이드해야 하는 아래 4개의 메소드를 재정의해야 한다.
 	
-	private static final Logger logger = LoggerFactory.getLogger(PreChkFilter.class);
+	private static final Logger logger = LoggerFactory.getLogger(PreFilter.class);
 	
 	private static final int FILTER_ORDER = 1; // 요청을 보내야 순서
 	private static final boolean SHOULD_FILTER = true;

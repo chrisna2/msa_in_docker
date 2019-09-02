@@ -54,6 +54,11 @@
 		    <artifactId>httpclient</artifactId>
     	</dependency>
 		
+		<!-- 9장 : 주울에 해당 의존성을 추가 할 경우 주울에 호출되는 모든 서비스에 추적 아이디가 생성된다. -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

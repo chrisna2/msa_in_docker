@@ -11,10 +11,10 @@ import com.netflix.zuul.exception.ZuulException;
 
 // 트랜잭션과 연관된 모든 로깅을 완료할 최적의 장소!!
 @Component
-public class PostInjectLogFilter extends ZuulFilter{
+public class PostFilter extends ZuulFilter{
 	//모든 줄 필터는 ZuulFilter클래스를 확장하고 오버라이드해야 하는 아래 4개의 메소드를 재정의해야 한다.
 	
-	private static final Logger logger = LoggerFactory.getLogger(PostInjectLogFilter.class);
+	private static final Logger logger = LoggerFactory.getLogger(PostFilter.class);
 		
 	private static final int FILTER_ORDER = 1; // 요청을 보내야 하는 순서
 	private static final boolean SHOULD_FILTER = true;

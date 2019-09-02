@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component;
 import com.netflix.zuul.ZuulFilter;
 
 @Component
-public class MiddleRoutesFilter extends ZuulFilter {
+public class RouteFilter extends ZuulFilter {
 //동적 경로 필터 라우팅 설정 필터
     private static final int FILTER_ORDER =  1;
     private static final boolean SHOULD_FILTER =true;
     
-    private static final Logger logger = LoggerFactory.getLogger(MiddleRoutesFilter.class);
+    private static final Logger logger = LoggerFactory.getLogger(RouteFilter.class);
     
     @Autowired
     FilterUtils filterUtils;
@@ -43,10 +43,7 @@ public class MiddleRoutesFilter extends ZuulFilter {
 
     @Override
     public Object run() {
-    	/*
-    	 * 해당 유저의 권한에 따라 페이지 라우팅 변경 예정
-    	 * 
-    	 * */
+    	//TODO:해당 유저의 권한에 따라 페이지 라우팅 변경 예정
         return null;
     }
     
