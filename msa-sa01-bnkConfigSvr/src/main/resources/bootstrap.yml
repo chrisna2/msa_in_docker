@@ -1,0 +1,12 @@
+encrypt:
+  key: q1w2e3r4t5
+server:
+  port: 8888
+spring:
+  application:
+    name: bnkconfigsvr
+  cloud:
+    config:
+      server:
+        encrypt:
+          enabled: false

@@ -1,0 +1,26 @@
+example:
+  property: '"Message Concept : Postgres DB Call : I am Default"'
+logging:
+  file: logs/spring-boot-logging.log
+  level:
+    com:
+      tyn:
+        bnk:
+          persistence:
+            '*': INFO
+    org:
+      springframework: INFO
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mappers/**/*.xml
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: '{cipher}bbc7660cefd7691d70861c1ff53d1d90d8c11c7ad692645b49a89599293fff1a'
+    platform: '"postgres"'
+    testWhileIdle: true
+    url: jdbc:postgresql://postgres:5432/concept
+    username: concept
+    validationQuery: SELECT 1
+  postgres:
+    driverClassName: '"org.postgresql.Driver"'

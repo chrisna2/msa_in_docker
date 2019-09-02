@@ -1,0 +1,34 @@
+eureka:
+  instance:
+    prefer-ip-address: true
+example:
+  property: '"ZUUL : Default Server Status"'
+hystrix:
+  command:
+    default:
+      excution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+logging:
+  level:
+    com:
+      netflix: INFO
+      tyn:
+        bnk: INFO
+    org:
+      springframework:
+        web: INFO
+zuul:
+  debug:
+    request: true
+  prefix: /bnk
+  routes:
+    bnkauthserver: /a/**
+    concept:
+      strip-prefix: true
+    harang:
+      strip-prefix: true
+    msgconcept: /mc/**
+    msgharang: /mh/**
+  sensitiveHeaders: Cookie,Set-Cookies

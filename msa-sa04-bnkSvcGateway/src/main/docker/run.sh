@@ -16,7 +16,6 @@ echo "Starting Zuul Service with $BNKCONFIGSVR_URI"
 echo "********************************************************"
 java -Djava.security.egd=file:/dev/./urandom -Dserver.port=$SERVER_PORT   \
      -Deureka.client.service-url.defaultZone=$BNKREGSERVER_URI   \
-     -Dspring.cloud.config.uri=$BNKCONFIGSVR_URI                \
-     -Dspring.profiles.active=$PROFILE                          \
-     -Dspring.zipkin.baseUrl=$ZIPKIN_URI                        \     
+     -Dspring.cloud.config.uri=$BNKCONFIGSVR_URI                 \
+     -Dspring.profiles.active=$PROFILE                           \
      -jar /usr/local/bnksvcgateway/@project.build.finalName@.jar

@@ -42,5 +42,4 @@ java -Djava.security.egd=file:/dev/./urandom -Dserver.port=$SERVER_PORT   \
      -Dspring.profiles.active=$PROFILE 									  \
   	 -Dspring.cloud.stream.kafka.binder.zkNodes=$ZKSERVER_URI 			  \
      -Dspring.cloud.stream.kafka.binder.brokers=$KAFKASERVER_URI 		  \
-     -Dspring.zipkin.baseUrl=$ZIPKIN_URI                        		  \          
      -jar /usr/local/msgharang/@project.build.finalName@.jar

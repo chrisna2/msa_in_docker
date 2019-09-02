@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: bnksvcgateway
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:8888
+  profiles:
+    active: default

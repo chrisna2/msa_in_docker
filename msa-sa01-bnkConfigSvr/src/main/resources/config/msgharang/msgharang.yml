@@ -1,0 +1,28 @@
+example:
+  property: '"Message Harang : Default Server Status"'
+logging:
+  file: logs/spring-boot-logging.log
+  level:
+    com:
+      tyn:
+        bnk:
+          persistence:
+            '*': INFO
+    org:
+      springframework: INFO
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mappers/**/*.xml
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
+    password: '{cipher}bbc7660cefd7691d70861c1ff53d1d90d8c11c7ad692645b49a89599293fff1a'
+    platform: mysql
+    testWhileIdle: true
+    url: jdbc:mariadb://mariadb:3306/harang
+    username: harang
+    validationQuery: SELECT 1
+  mariadb:
+    driverClassName: '"org.mariadb.jdbc.Driver"'

@@ -1,0 +1,26 @@
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+spring:
+  cloud:
+    stream:
+      bindings:
+        output:
+          content-type: application/json
+          destination: orgChgConcept
+      kafka:
+        binder:
+          brokers: localhost
+          zknodes: localhost
+  zipkin:
+    base-url: http://localhost:9411/zipkin/

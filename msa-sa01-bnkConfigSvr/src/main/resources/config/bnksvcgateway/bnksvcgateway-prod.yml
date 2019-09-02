@@ -1,0 +1,38 @@
+eureka:
+  instance:
+    prefer-ip-address: true
+example:
+  property: '"ZUUL : Production Server Status"'
+hystrix:
+  command:
+    default:
+      excution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+logging:
+  level:
+    com:
+      netflix: ERROR
+      tyn:
+        bnk: ERROR
+    org:
+      springframework:
+        web: ERROR
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+zuul:
+  debug:
+    request: true
+  ignored-services: '*'
+  prefix: /bnk
+  routes:
+    concept:
+      strip-prefix: true
+    harang:
+      strip-prefix: true
+    msgconcept: /mc/**
+    msgharang: /mh/**

@@ -1,0 +1,10 @@
+encrypt:
+  key: q1w2e3r4t5
+spring:
+  application:
+    name: concept
+  cloud:
+    config:
+      uri: http://localhost:8888
+  profiles:
+    active: default

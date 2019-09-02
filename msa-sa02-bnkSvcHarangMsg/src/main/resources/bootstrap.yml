@@ -1,0 +1,12 @@
+encrypt:
+  key: q1w2e3r4t5
+server:
+  port: 8080
+spring:
+  application:
+    name: msgharang
+  cloud:
+    config:
+      uri: http://localhost:8888
+  profiles:
+    active: default

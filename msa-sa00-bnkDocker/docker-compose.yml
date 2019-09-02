@@ -183,6 +183,12 @@ services:
       KAFKA_ADVERTISED_HOST_NAME: kafka
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       
+  # 책과는 달리 현재는 사용자가 직접 집킨 서버를 구성하는 것은 지원하지 않는다. 도커 이미지로 대체됨
+  zipkin:
+    image: openzipkin/zipkin
+    ports:
+      - 9411:9411
+      
   #Attention: command는 내가 만든 계정의 정보 를 가져와야 함
   logspout:
     image: gliderlabs/logspout
@@ -191,10 +197,3 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       
-  # 책과는 달리 현재는 사용자가 직접 집킨 서버를 구성하는 것은 지원하지 않는다. 도커 이미지로 대체됨
-  zipkin:
-    image: openzipkin/zipkin
-    container_name: zipkin
-    ports:
-      - 9411:9411
-  
