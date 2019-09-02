@@ -9,6 +9,8 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 
+import brave.Tracer;
+
 // 트랜잭션과 연관된 모든 로깅을 완료할 최적의 장소!!
 @Component
 public class PostFilter extends ZuulFilter{
@@ -21,6 +23,9 @@ public class PostFilter extends ZuulFilter{
 		
 	@Autowired
 	FilterUtils filterUtils;
+	
+	@Autowired
+	Tracer tracer;
 	
 	@Override
 	public String filterType() {
@@ -45,8 +50,8 @@ public class PostFilter extends ZuulFilter{
 		// TODO 서비스가 필터를 통과 할때 마다 실행되는 코드. 
         RequestContext ctx = RequestContext.getCurrentContext();
         //원래 Http 요청에서 전달된 상관관계ID를 가져와 응답에 삽입한다.
-        logger.debug("Adding the correlation id to the outbound headers. {}", filterUtils.getCorrelationId());
-        ctx.getResponse().addHeader(FilterUtils.CORRELATION_ID, filterUtils.getCorrelationId());
+        logger.debug("Adding the correlation id to the outbound headers. {}", tracer.currentSpan().context().traceIdString());
+        ctx.getResponse().addHeader(FilterUtils.CORRELATION_ID, tracer.currentSpan().context().traceIdString());
         //처음부터 끝까지 주을에 들어오고 나가는 오청 항목을 보여 주기 위해 나가는 요청 URI를 기록한다.
         logger.debug("Completing outgoing request for {}.", ctx.getRequest().getRequestURI());
 		return null;

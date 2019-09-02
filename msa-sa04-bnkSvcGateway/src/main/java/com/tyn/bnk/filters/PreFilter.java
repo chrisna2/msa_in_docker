@@ -1,7 +1,5 @@
 package com.tyn.bnk.filters;
 
-import java.util.UUID;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +8,8 @@ import org.springframework.stereotype.Component;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
+
+import brave.Tracer;
 
 @Component
 public class PreFilter extends ZuulFilter{
@@ -23,6 +23,9 @@ public class PreFilter extends ZuulFilter{
 	@Autowired
 	FilterUtils filterUtils;
 	//모든 필터에서 공통으로 사용되는 기능을 FilterUtils 클래스에 담는다.
+	
+	@Autowired
+	Tracer tracer;
 	
 	@Override
 	public String filterType() {
@@ -69,9 +72,10 @@ public class PreFilter extends ZuulFilter{
 		return false;
 	}
 	
+	//[9장 이후 변경] 이전에는 렌덤 메세지가 설정됨
     private String generateCorrelationId(){
-    	//실제로 tmx-correlation-id존재 여부를 확인하고, 없으면 상관관계ID의 GUID 값을 랜덤으로 생성하는 메서드
-        return UUID.randomUUID().toString();
+    	//실제로 tmx-correlation-id존재 여부를 확인하고, tracer를 통해 추적 아이디를 입력
+        return tracer.currentSpan().context().traceIdString();
     }
 
 
