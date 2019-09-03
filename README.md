@@ -33,7 +33,7 @@
 1. docker-compose.yml에 대해 설명이 부족해서 찾아가서 공부 해야 했다. docker에 대해 추가적으로 공부를 진행 해야 한다.
 2. dockerfile에 대해 설명이 없었고, 그외 docker-compose로 컨테이서 실행시 각 컨테이너 마다 내제되어 있던 run.sh 쉘 스크립트 파일의
 존재를 인지 하지 못해 실행에 대한 삽질을 지속 해야 했다.
-3. 기존에 porperties 파일을 모드 yml 파일로 변환 하였다. run.sh파일에 properties 설정 명령이 인식 되고 있지 않았다.
+3. 기존에 porperties 파일을 모두 yml 파일로 변환 하였다. run.sh파일에 properties 설정 명령이 인식 되고 있지 않았다. 자동변환을 하다보니 관련 설명 주석이 사라졌다. 필요한 주석은 추후 추가 해야 될것 같다.
 
 # 프로젝트를 진행하면서 추가로 배우게 된 것들
 1. Docker (이게 제일 크다.) -> 사용한 docker는 윈도우 버전 docker다
