@@ -15,6 +15,10 @@ import org.springframework.web.client.RestTemplate;
 import com.tyn.bnk.redis.ConceptRedisRepository;
 import com.tyn.bnk.utils.UserContext;
 
+import brave.Span;
+import brave.Tracer;
+import brave.Tracer.SpanInScope;
+
 //대안 1 - restTemplate
 @Component
 public class ConceptRestClient {
@@ -25,6 +29,12 @@ public class ConceptRestClient {
 	/*8장 추가*/
 	@Autowired
 	ConceptRedisRepository conRedisRepo;
+	
+	/*9장 추가
+		스프링 클라우드 슬루스의 추적 정보를 프로그래밍 방식으로 접근하는 데 사용한다.
+	*/
+	@Autowired
+	Tracer tracer;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ConceptRestClient.class);
 	/* 로컬에서 실행하기
@@ -53,16 +63,29 @@ public class ConceptRestClient {
 	} 
 	
 	//8장 레디스
-	
 	//레디스 캐쉬 데이터 확인
 	private Map<String, Object> checkRedisCache(String emp_no){
-		try {
+		
+		//[9장 추가] 사용자 정의 스팬을 위해 readConceptDataFromRedis라는 새로운 스팬을 설정한다.
+		Span newSpan = tracer.nextSpan().name("readConceptDataFromRedis");
+		
+		//[9장 추가] 
+		try (SpanInScope ws = tracer.withSpanInScope(newSpan.start())){
 			return conRedisRepo.findeConcept(emp_no);
 		}
 		catch (Exception e) {
 			logger.error("\n★래디스 캐쉬를 체크 하다 에러 발생"
 					+ "\nemp_no : {} \n에러메세지 : {}", emp_no, e);
 			return null;
+		}
+		// finally 불록에서 스팬을 종료한다.
+		finally {
+			//태그정보를 스팬에 추가할수 있다. 이 클래스에서는 집킨에서 캡처할 서비스의 이름을 제공한
+			newSpan.tag("peer.service", "redis");
+			//스프링 클라우드 슬루스에 호출이 완료된 시간을 캡처하도록 이벤트를 로깅한다.
+			newSpan.annotate("cr");
+			//추적을 닫는다. closer()메서드를 호출
+			newSpan.finish();
 		}
 	}
 	
