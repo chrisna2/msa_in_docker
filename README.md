@@ -22,6 +22,8 @@
 5. Oauth2 보안 서버 구성 (Master 브랜치) -> 실행 못하게 막음
 6. 메세징 아키텍트 구성 (Kafka, Zookeeper)
 7. 레디스 분산 캐싱 구성
+8. 페이퍼트레일을 이용한 로깅 조회
+9. 오픈집킨 서버를 이용한 분산추적 환경 구성 
 
 # 책과 다른점
 1. 책에서 license / organization 서비스가 여기서 harang / concept / msgharang / msgconcept 서비스로 변경되었다.
