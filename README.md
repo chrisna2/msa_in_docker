@@ -14,6 +14,15 @@
 전환 하였다. 8장에 책에서 제시된 kafka와 redis, 그리고 zookeeper의 실행의 기본 조건을 따르기 위함이었다.
 따라서 이전처럼 STS를 통해 로컬에서 실행은 불가능하고 프로젝트 실행을 확인 하기 위해서는 Docker를 통해 실행하여야 한다.
 
+# 여기서 구현된 것들
+1. 스프링 클라우드 컨피그 서버
+2. 서비스 디스커버리 : 유레카 서버
+3. 히스트릭스, 클라이언트 회복성 패턴
+4. 주울(Zuul) 서비스 게이트웨이 서버
+5. Oauth2 보안 서버 구성 (Master 브랜치) -> 실행 못하게 막음
+6. 메세징 아키텍트 구성 (Kafka, Zookeeper)
+7. 레디스 분산 캐싱 구성
+
 # 책과 다른점
 1. 책에서 license / organization 서비스가 여기서 harang / concept / msgharang / msgconcept 서비스로 변경되었다.
 2. 책에서는 1개의 database를 사용하였으나 여기서 2개의 데이터 베이스(postgreSql, mariaDB) 사용하였다.
