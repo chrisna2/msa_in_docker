@@ -15,12 +15,21 @@ spring:
   cloud:
     stream:
       bindings:
-        output:
+        conceptchannel:
           content-type: application/json
           destination: orgChgConcept
+          group: harangGroup
       kafka:
         binder:
           brokers: localhost
           zknodes: localhost
+  redis:
+    host: redis
+    lettuce:
+      pool:
+        max-active: 10
+        max-idle: 10
+        min-idle: 2
+    port: 6379
   zipkin:
     baseUrl: localhost:9411

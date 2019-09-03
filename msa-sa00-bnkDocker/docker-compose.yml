@@ -31,8 +31,10 @@ services:
         SERVER_PORT: 5555
         BNKCONFIGSVR_PORT: 8888
         BNKREGSERVER_PORT: 8761
+        ZIPKIN_PORT: 9411
         BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
         BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
+        ZIPKIN_URI: "http://zipkin:9411"
   
   mariadb:
       image: mariadb:10.4
@@ -115,12 +117,12 @@ services:
         BNKREGSERVER_PORT: 8761
         BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
         BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
-        
+        ZIPKIN_URI: "http://zipkin:9411"
         KAFKASERVER_URI: "kafkaserver"
         ZKSERVER_URI: "zookeeper"
         KAFKASERVER_PORT:    2181
         REDIS_PORT:          6379
-        
+        ZIPKIN_PORT:         9411
         ENCRYPT_KEY: "q1w2e3r4t5"
         
   msgconcept:
@@ -135,11 +137,11 @@ services:
         BNKREGSERVER_PORT: 8761
         BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
         BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
-       
+        ZIPKIN_URI: "http://zipkin:9411"
         KAFKASERVER_URI: "kafkaserver"
         ZKSERVER_URI: "zookeeper"
         KAFKASERVER_PORT: 2181
-       
+        ZIPKIN_PORT: 9411
         ENCRYPT_KEY: "q1w2e3r4t5"        
         
 #  bnkauthserver:
