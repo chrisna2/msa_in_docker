@@ -58,7 +58,7 @@ services:
         - postgres_data:/var/lib/postgresql/data
       environment:
         - POSTGRES_USER=concept
-        - POSTGRES_PASSWORD=1111
+        - POSTGRES_PASSWORD=postgres123
         - POSTGRES_DB=concept
         - POSTGRES_INITDB_ARGS=--encoding=UTF-8
         #- PGDATA=/TMP
@@ -87,7 +87,7 @@ services:
 #        BNKAUTHSERVER_URI:   "http://bnkauthserver:8901/auth/user"
 #        
 #        ENCRYPT_KEY: "q1w2e3r4t5"
-#        
+
 #  concept:
 #      image: chrisna2/concept:20190808
 #      ports:
