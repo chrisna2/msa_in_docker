@@ -60,7 +60,9 @@
   2. 서비스 실행 => service docker start
   3. 부팅시 자동 실행 설정 => chkconfig docker on
   ```
-3. 필요한 패키지 설치 
+3. 필요한 프로그램 설치 : git, maven (지금까진 이정도면 충분하다.)
+4. git clone https://github.com/chrisna2/msa_in_docker.git
+5. mvn clean package docker:build
 
 # 추후 추가로 진행해야 할 것들
 1. 7장과 8장을 같이 융합
