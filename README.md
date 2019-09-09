@@ -51,18 +51,22 @@
 3. Linux -> 각각의 컨테이너의 내부를 확인하기 위해서는 리눅스 명령어를 알아야 했다.
 
 # windows docker -> linux docker (centOS)
+> 윈도우 도커로는 실제 웹 배포 환경을 구축하기 대단히 어려워서 가상화 서버를 통해 배포 시스템을 구축해 보기로 했다
+
 1. vmware로 centos 가상화 구축
 2. 리눅스 docker 설치
   ```
-  * Install => yum install docker
-  * 서비스 실행 => service docker start
-  * 부팅시 자동 실행 설정 => chkconfig docker on
+  1. Install => yum install docker
+  2. 서비스 실행 => service docker start
+  3. 부팅시 자동 실행 설정 => chkconfig docker on
+  ```
 
 # 추후 추가로 진행해야 할 것들
 1. 7장과 8장이 같이 융합되어야 한다.
 2. 로그인을 검증정보 DB를 따로 만들야 될것 같다. Mysqgl? MongoDb?
 3. 현재 MSA 환경에 파이썬을 끼얺어 봐야 할것 같다.
-4. 9장 분산 로그 환경 구성
+~~4. 9장 분산 로그 환경 구성~~
 5. 10장 AWS 배포 까지.
+6. 리눅스 서버에 docker를 구축하고 실제 MSA CICD 구성
 
 
