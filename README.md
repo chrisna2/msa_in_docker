@@ -53,7 +53,7 @@
 # windows docker -> linux docker (centOS)
 1. vmware로 centos 가상화 구축
 2. 리눅스 docker 설치
-'''
+  ```
   * Install => yum install docker
   * 서비스 실행 => service docker start
   * 부팅시 자동 실행 설정 => chkconfig docker on
