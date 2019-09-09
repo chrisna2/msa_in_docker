@@ -50,6 +50,13 @@
 2. Shell
 3. Linux -> 각각의 컨테이너의 내부를 확인하기 위해서는 리눅스 명령어를 알아야 했다.
 
+# windows docker -> linux docker (centOS)
+1. vmware로 centos 가상화 구축
+2. 리눅스 docker 설치
+  * Install => yum install docker
+  * 서비스 실행 => service docker start
+  * 부팅시 자동 실행 설정 => chkconfig docker on
+
 # 추후 추가로 진행해야 할 것들
 1. 7장과 8장이 같이 융합되어야 한다.
 2. 로그인을 검증정보 DB를 따로 만들야 될것 같다. Mysqgl? MongoDb?
