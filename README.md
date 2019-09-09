@@ -1,13 +1,16 @@
 # Spring-Microservices-In-Action with Docker
 책을 따라하는 것보다. 내 것으로 만드는게 더 중요하다.
 * 참고도서 : 스프링 마이크로서비스 공작소 (존 카넬/ 정성권/ 길벗/ 2018)
+* 이전 프로젝트 : https://github.com/chrisna2/Spring-Microservices-In-Action
 
+```
 이클립스 임포트 방법
 1. 일단 URL복사
 2. 임포트 > git URL > existing project > 폴더 1개로 임포트된것 확인
 3. 다시 임포트 > workspace director import > 1개 폴더로 임포트된 경로 디렉토리 선택
 4. 하위프로젝트 나열된 것 확인 후 임포트
 5. 처음 폴더 1개로 임포트된것 삭제 (실제 삭제 아님!)
+```
 
 # 프로젝트 생성 이유
 8장 이후부터 실행을 확인하기 위해서 기존 로컬에서 msa를 실행 한 것과 달리 docker를 통해 실행하는 것으로 방향을
