@@ -53,7 +53,7 @@
 2. Shell
 3. Linux -> 각각의 컨테이너의 내부를 확인하기 위해서는 리눅스 명령어를 알아야 했다.
 
-# windows docker -> linux docker (centOS) [branch : mylinux]
+# windows docker -> linux docker [branch : mylinux]
 > 윈도우 도커로는 실제 웹 배포 환경을 구축하기 대단히 어려워서 가상화 서버를 통해 배포 시스템을 구축해 보기로 했다
 
 1. vmware로 centos 가상화 구축
