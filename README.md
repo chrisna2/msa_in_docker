@@ -131,6 +131,8 @@ volumes:
   > > host    all             all             192.168.159.1/32        trust [추가]
   > > host    concept         concept         0.0.0.0/0               password [모든IP허용]
 ```
+9. 현재 상황에 맞춰 따로 브랜치를 만들어서 적용 했다 mylinux 브랜치다. 앞으로의 개발은 mylinux로 대체 한다.
+
 
 # 추후 추가로 진행해야 할 것들
 1. 7장과 8장을 같이 융합
