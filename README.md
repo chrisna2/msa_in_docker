@@ -102,7 +102,14 @@ volumes:
         - MYSQL_DATABASE=harang
  <postgers 도 동일>       
 ```
-
+7. mariaDB docker 컨테이너 run 이후 외부에서 접속하기 위해 처리해야할 절차.
+```
+> docker ps
+> docker exec -it <DB컨테이너명> bash
+(ex : docker exec -it  msa-sa00-bnkdocker_mariadb_1 bash )
+> > mysql
+> > GRANT ALL PRIVILEGES ON *.* TO '아이디'@'111.222.33.44' IDENTIFIED BY '패스워드';
+```
 
 # 추후 추가로 진행해야 할 것들
 1. 7장과 8장을 같이 융합
