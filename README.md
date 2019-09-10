@@ -109,7 +109,8 @@ volumes:
 > docker exec -it <DB컨테이너명> bash
 (ex : docker exec -it  msa-sa00-bnkdocker_mariadb_1 bash )
 > > mysql
-> > GRANT ALL PRIVILEGES ON *.* TO '아이디'@'111.222.33.44' IDENTIFIED BY '패스워드';
+> > GRANT ALL PRIVILEGES ON harang.* TO '아이디'@'111.222.33.44' IDENTIFIED BY '패스워드'; [이렇게하면 특정 아이피만 허용]
+> > GRANT ALL PRIVILEGES ON harang.* TO '아이디'@'%' IDENTIFIED BY '패스워드'; [이렇게하면 모든 아이피 접속 허용]
 
 이렇게 안하면 가상머신을 벗어나서 DB에 접속이 되지 않는다.
 ```
@@ -128,6 +129,7 @@ volumes:
 2. find -name 'g_hba.conf'
   > vi pg_hba.conf
   > > host    all             all             192.168.159.1/32        trust [추가]
+  > > host    concept         concept         0.0.0.0/0               password [모든IP허용]
 ```
 
 # 추후 추가로 진행해야 할 것들
