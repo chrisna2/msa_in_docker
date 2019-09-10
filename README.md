@@ -114,7 +114,21 @@ volumes:
 이렇게 안하면 가상머신을 벗어나서 DB에 접속이 되지 않는다.
 ```
 8. postgreSql docker 컨테이너 run 이후 외부에서 접속하기 위해 처리해야할 절차.
-> GRANT ALL PRIVILEGES ON *.* TO '아이디'@'111.222.33.44' IDENTIFIED BY '패스워드';
+> FATAL: no pg_hba.conf entry for host "", user "", database "postgres", SSL off
+```
+위와는 다르게 이건 직접 파일을 수정해야 한다. 반드시 volume 설정해야한다는 전제조건이 깔림
+1. find -name 'postgrsql.conf'
+  > vi postgresql.conf
+  > > # - Connection Settings -
+      listen_addresses = '*'
+      # [주석해제]
+      port = 5432                   
+      max_connections = 100            
+      
+2. find -name 'g_hba.conf'
+  > vi pg_hba.conf
+  > > host    all             all             192.168.159.1/32        trust [추가]
+```
 
 # 추후 추가로 진행해야 할 것들
 1. 7장과 8장을 같이 융합
