@@ -67,10 +67,42 @@
 4. git clone https://github.com/chrisna2/msa_in_docker.git
 5. mvn clean package docker:build
 6. [수정 지점] : docker-compose 파일의 볼륨을 설정할 경우 
+> window-docker에는 host volume을 외부 볼륨(external)으로 따로 경로설정없이 이름으로 구성
 ```
-* window-docker에는 host volume을 외부 볼륨(external)으로 따로 경로설정없이 이름으로 구성 : 윈도우 경로로 설정할 경우 권한 문제로 설정이 구성되지 않았음
-* 리눅스에서는 해당 볼륨에 host경로:container경로로 정석대로 설정함 다만 여기서도 권한 문제가 발생하여 volume 경로 끝에 :z를 붙임
+volumes:
+  postgres_data:
+    external: true  
+  mariadb_data:
+    external: true
+<중략>   
+  mariadb:
+      image: mariadb:10.4
+      ports:
+        - "3306:3306"
+      volumes:
+        - mariadb_data:/var/lib/mysql
+<postgers 도 동일>
+-> 이렇게 했던 이유는 windows host 경로에 정상적으로 DB Data가 입력되지 않았음
 ```
+
+> 리눅스에서는 해당 볼륨에 host경로:container경로로 정석대로 설정함 다만 여기서도 권한 문제가 발생하여 volume 경로 끝에 :z를 붙임
+```
+<외부 볼륨은 삭제처리>
+  mariadb:
+      image: mariadb:10.4
+      user: root
+      ports:
+        - "3306:3306"
+      volumes:
+        - /mydev/database/mariadb:/var/lib/mysql:z
+      environment:
+        - MYSQL_ROOT_PASSWORD=1111
+        - MYSQL_USER=harang
+        - MYSQL_PASSWORD=1111
+        - MYSQL_DATABASE=harang
+ <postgers 도 동일>       
+```
+
 
 # 추후 추가로 진행해야 할 것들
 1. 7장과 8장을 같이 융합
