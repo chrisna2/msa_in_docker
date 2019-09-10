@@ -141,5 +141,6 @@ volumes:
 4. ~~9장 분산 로그 환경 구성~~ (완료)
 5. 10장 AWS 배포 까지.
 6. 리눅스 서버에 docker를 구축하고 실제 MSA CICD 구성
+7. ui msa 서비스를 구성해 본다. msa-sa06-bnkuisvc
 
 
