@@ -61,7 +61,7 @@ services:
       image: store/oracle/database-enterprise:12.2.0.1
       user: root
       volumes:
-        - /mydev/database/oracle:/ORCL
+        - /mydev/database/oracle:/ORCL:z
       ports:
         - "1521:1521"
       environment:
