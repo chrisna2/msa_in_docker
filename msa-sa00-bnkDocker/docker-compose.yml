@@ -45,8 +45,8 @@ services:
         - MYSQL_DATABASE=harang
   
   postgres:
-      image: chrisna2/postgres_db:20190912
-      #image: postgres:11.5
+      #image: chrisna2/postgres_db:20190912
+      image: postgres:11.5
       user: root
       ports:
         - "5432:5432"
