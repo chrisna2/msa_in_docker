@@ -31,33 +31,33 @@ services:
         ZIPKIN_URI: "http://zipkin:9411"
 
   mariadb:
-      image: chrisna2/maria_db:20190912
-      #image: mariadb:10.4
-      #user: root
-      #ports:
-      #  - "3306:3306"
-      #volumes:
-      #  - /mydev/database/mariadb:/var/lib/mysql:z
-      #environment:
-      #  - MYSQL_ROOT_PASSWORD=1111
-      #  - MYSQL_USER=harang
-      #  - MYSQL_PASSWORD=1111
-      #  - MYSQL_DATABASE=harang
+      #image: chrisna2/maria_db:20190912
+      image: mariadb:10.4
+      user: root
+      ports:
+        - "3306:3306"
+      volumes:
+        - /mydev/database/mariadb:/var/lib/mysql:z
+      environment:
+        - MYSQL_ROOT_PASSWORD=1111
+        - MYSQL_USER=harang
+        - MYSQL_PASSWORD=1111
+        - MYSQL_DATABASE=harang
   
   postgres:
       image: chrisna2/postgres_db:20190912
       #image: postgres:11.5
-      #user: root
-      #ports:
-      #  - "5432:5432"
-      #volumes:       
-      #  - /mydev/database/postgresql:/var/lib/postgresql/data:z
-      #environment:
-      #  - POSTGRES_USER=concept
-      #  - POSTGRES_PASSWORD=1111
-      #  - POSTGRES_DB=concept
-      #  - POSTGRES_INITDB_ARGS=--encoding=UTF-8
-      #  #- PGDATA=/TMP
+      user: root
+      ports:
+        - "5432:5432"
+      volumes:       
+        - /mydev/database/postgresql:/var/lib/postgresql/data:z
+      environment:
+        - POSTGRES_USER=concept
+        - POSTGRES_PASSWORD=1111
+        - POSTGRES_DB=concept
+        - POSTGRES_INITDB_ARGS=--encoding=UTF-8
+        #- PGDATA=/TMP
   
   oracle:
       image: store/oracle/database-enterprise:12.2.0.1
