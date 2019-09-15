@@ -206,5 +206,5 @@ services:
     container_name: logspout
     command: syslog://logs3.papertrailapp.com:38619
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:z
+      - /var/run/docker.sock:/var/run/docker.sock
       
