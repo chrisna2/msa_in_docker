@@ -78,40 +78,40 @@ services:
     ports:
       - 6379:6379        
  
-#  harang:
-#      image: chrisna2/harang:20190808
-#      ports:
-#        - "8080:8080"
-#      environment:
-#        PROFILE: "default"
-#        SERVER_PORT: 8080
-#        ES_PORT:           9200
-#        MARIADB_PORT:     3306
-#        BNKCONFIGSVR_PORT: 8888
-#        BNKREGSERVER_PORT: 8761
-#        BNKAUTHSERVER_PORT:   8091
-#        BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
-#        BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
-#        BNKAUTHSERVER_URI:   "http://bnkauthserver:8901/auth/user"
-#        
-#        ENCRYPT_KEY: "q1w2e3r4t5"
+  harang:
+      image: chrisna2/harang:20190808
+      ports:
+        - "8080:8080"
+      environment:
+        PROFILE: "default"
+        SERVER_PORT: 8080
+        ES_PORT:           9200
+        MARIADB_PORT:     3306
+        BNKCONFIGSVR_PORT: 8888
+        BNKREGSERVER_PORT: 8761
+        BNKAUTHSERVER_PORT:   8091
+        BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
+        BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
+        BNKAUTHSERVER_URI:   "http://bnkauthserver:8901/auth/user"
+        
+        ENCRYPT_KEY: "q1w2e3r4t5"
 
-#  concept:
-#      image: chrisna2/concept:20190808
-#      ports:
-#        - "8085:8085"
-#      environment:
-#        PROFILE: "default"
-#        SERVER_PORT: 8085
-#        POSTGRES_PORT:     5432
-#        BNKCONFIGSVR_PORT: 8888
-#        BNKREGSERVER_PORT: 8761
-#        BNKAUTHSERVER_PORT:   8091
-#        BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
-#        BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
-#        BNKAUTHSERVER_URI:   "http://bnkauthserver:8901/auth/user"
-#       
-#        ENCRYPT_KEY: "q1w2e3r4t5"
+  concept:
+      image: chrisna2/concept:20190808
+      ports:
+        - "8085:8085"
+      environment:
+        PROFILE: "default"
+        SERVER_PORT: 8085
+        POSTGRES_PORT:     5432
+        BNKCONFIGSVR_PORT: 8888
+        BNKREGSERVER_PORT: 8761
+        BNKAUTHSERVER_PORT:   8091
+        BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
+        BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
+        BNKAUTHSERVER_URI:   "http://bnkauthserver:8901/auth/user"
+       
+        ENCRYPT_KEY: "q1w2e3r4t5"
 
   msgharang:
       image: chrisna2/msgharang:20190808

@@ -25,10 +25,8 @@ zuul:
   prefix: /bnk
   routes:
     bnkauthserver: /a/**
-    concept:
-      strip-prefix: true
-    harang:
-      strip-prefix: true
+    concept: /c/**
+    harang: /h/**
     msgconcept: /mc/**
     msgharang: /mh/**
   sensitiveHeaders: Cookie,Set-Cookies
