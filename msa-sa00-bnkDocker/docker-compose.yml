@@ -59,17 +59,17 @@ services:
         - POSTGRES_INITDB_ARGS=--encoding=UTF-8
         #- PGDATA=/TMP
   
-  oracle:
-      image: store/oracle/database-enterprise:12.2.0.1
-      user: root
-      volumes:
-        - /mydev/database/oracle:/ORCL:z
-      ports:
-        - "1521:1521"
-      environment:
-        - ORACLE_SID=orcl
-        - ORACLE_PWD=1111
-        - ORACLE_MEM=3000
+#  oracle:
+#      image: store/oracle/database-enterprise:12.2.0.1
+#      user: root
+#      volumes:
+#        - /mydev/database/oracle:/ORCL:z
+#      ports:
+#        - "1521:1521"
+#      environment:
+#        - ORACLE_SID=orcl
+#        - ORACLE_PWD=1111
+#        - ORACLE_MEM=3000
 
   redis:
     image: redis:alpine
