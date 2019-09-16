@@ -152,19 +152,19 @@ services:
         ZIPKIN_PORT: 9411
         ENCRYPT_KEY: "q1w2e3r4t5"        
         
-#  bnkauthserver:
-#      image: chrisna2/bnkauthserver:20190808
-#      ports:
-#        - "8901:8901"
-#      environment:
-#        PROFILE: "default"
-#        SERVER_PORT: 8901
-#        MARIADB_PORT:     3306
-#        BNKCONFIGSVR_PORT: 8888
-#        BNKREGSERVER_PORT: 8761
-#        BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
-#        BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
-#        ENCRYPT_KEY: "q1w2e3r4t5"
+  bnkauthserver:
+      image: chrisna2/bnkauthserver:20190808
+      ports:
+        - "8901:8901"
+      environment:
+        PROFILE: "default"
+        SERVER_PORT: 8901
+        MARIADB_PORT:     3306
+        BNKCONFIGSVR_PORT: 8888
+        BNKREGSERVER_PORT: 8761
+        BNKCONFIGSVR_URI: "http://bnkconfigsvr:8888"
+        BNKREGSERVER_URI: "http://bnkregserver:8761/eureka/"
+        ENCRYPT_KEY: "q1w2e3r4t5"
 
   # kafkaserver:
   # image: spotify/kafka
